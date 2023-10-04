@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <title>Quiz Game</title>
+</head>
+
+<body style="overflow-x: hidden; padding: 0; margin: 0;">
+
+  <div class="container-fluid">
+
+    <!-- The Heading -->
+    <h1 class="w-100 fs-1 fw-bold text-center text-dark ">Quiz Game</h1>
+
+    <div class="row">
+
+      <div class="col-lg-6 ps-5">
+
+        <!-- The Quiz game instructions and details section -->
+        <div class="quiz-info my-5">
+
+          <p class="fs-4" style="line-height: 50px;"><span class="fs-2">H</span>i friends this is a quiz competition.. a game designed to sharpen your knowledge and make you more active.<span class="bg-warning text-white">Before starting the game read and understand the instructions given below on the about section / on the right side.</span> Let's see who can match it all. But let's begin. Click on the button below.</p>
+
+          <button class="start-quiz btn btn-success fs-5"  onclick="startQuiz()">Start Quiz</button>
+
+        </div>
+
+        <div class="about-quiz-game">
+
+          <h3 class="fw-bold my-3">About Quiz Game</h3>
+
+          <ul class="fs-5 fw-bold my-5" style="list-style-type: circle; line-height: 50px;">
+
+            <li class="my-5"><p>It is a Website Quiz Game will designed to sharpen your knowledge and make you more active</p></li>
+
+            <li class="my-5"><p> It consists of 10 questions, carrying 1 mark for each correct answer.</p></li>
+
+            <li class="my-5"><p>Built using HTML , CSS framework bootstrap and JavaScript</p></li>
+
+            <li class="my-5"><p>Take somke risk</p></li>
+
+
+          </ul>
+
+        </div>
+
+        <!-- The Quiz panel section -->
+        <div class="quiz-panel my-4" style="display: none;">
+
+          <!-- The Qustions -->
+          <ol class="questions d-flex">
+
+            <span class="question-number fs-4 me-2 fw-bold text-primary"></span>
+
+            <span class="question-number fs-4 me-4 fw-bold text-primary">:-</span>
+
+            <p id="question" class="text-primary fw-bold fs-3"></p>
+
+          </ol>
+
+          <!-- The Options -->
+          <ol class="answers" style="list-style-type: upper-alpha;">
+
+            <li><button class="btn text-dark fw-bold fs-5 btn-outline-secondary my-3 w-75" id="answer-1"></button></li>
+
+            <li><button class="btn text-dark fw-bold fs-5 btn-outline-secondary my-3 w-75" id="answer-2"></button></li>
+
+            <li><button class="btn text-dark fw-bold fs-5 btn-outline-secondary my-3 w-75" id="answer-3"></button></li>
+
+            <li><button class="btn text-dark fw-bold fs-5 btn-outline-secondary my-3 w-75" id="answer-4"></button></li>
+
+          </ol>
+
+          <!-- The Answer and details of answer -->
+          <div class="answer-details-div my-4 p-3" style="display: none;">
+
+            <!-- The Correct Answer -->
+            <div class="answer-header" style="display: flex;">
+
+              <h4 class="answer-head" id="answerHead"></h4>
+
+              <p class="correct-answer fs-4 mx-2" id="correctOne"></p>
+
+            </div>
+
+            <!-- The details of Correct answer -->
+            <div class="answer-note">
+
+              <h4 class="answer-notes" id="answerNotes"></h4>
+
+              <p class="answer-details fs-5" id="answerDetails"></p>
+
+            </div>
+
+            <!-- if we click this button will be display the answer and the details -->
+            <button class="show-answer-button btn btn-info fs-5 text-white" id="showAnswerButton">Show Answer</button>
+
+          </div>
+
+          <!-- The next and finish button -->
+          <div class="d-flex">
+
+            <button class="next-button btn btn-secondary mx-4 fs-5" onclick="nextQuestion()">Next</button>
+
+            <button class="finish-button btn btn-primary mx-4 fs-5" onclick="finishQuestion()">Finish</button>
+
+          </div>
+
+        </div>
+
+        <!-- The last results display the how many correct answer and wrong answer , users score. the return to home button -->
+        <div class="result" style="display: none;">
+
+          <!-- The correct answer count -->
+          <div class="result-panel my-5 bg-light d-flex">
+
+            <h3 class="my-3">Correct Answers : </h3>
+
+            <h4 class="mx-5 mt-3" id="correctAnswerResult"></h4>
+
+          </div>
+
+          <!-- The wrong answer count -->
+          <div class="wrong-result-panel my-5 bg-light d-flex">
+
+            <h3 class="my-3">Incorrect Answers : </h3>
+
+            <h4 class="mx-5 mt-3" id="incorrectAnswerResult"></h4>
+
+          </div>
+
+          <!-- The user attended questions count -->
+          <div class="attend my-5 bg-light d-flex">
+
+            <h3 class="my-3" >Total Attended Question : </h3>
+
+            <h4 class="mx-5 mt-3" id="totalAttend"></h4>
+
+          </div>
+
+          <!-- The total score -->
+          <div class="total-score my-5 bg-light d-flex">
+
+            <h3 class="my-3" >Total Score : </h3>
+
+            <h4 class="mx-5 mt-3" id="totalScore"></h4>
+
+          </div>
+
+          <!-- The return to home button -->
+          <button class="return-to-home btn btn-danger fs-5" onclick="returnToHome()">Return To Home</button>
+
+        </div>
+
+      </div>
+
+      <!-- More about the quiz game  -->
+      <div class="col-lg-6 px-3">
+
+        <!-- Quiz game instructions -->
+        <div class="instruction-panel m-5">
+
+          <h3 class="text-dark fw-bold text-uppercase">Instructions</h3>
+
+          <ul class="fs-5 fw-bold" style="list-style-type: square; line-height: 50px;">
+
+            <li class="my-5"><p class="text-muted">Click on the <span class="bg-success text-white rounded px-3 py-2">Start Quiz</span> button at the top/left side.</p> <div class="bg-secondary d-flex w-100 mx-5 my-3"><img class="w-50 my-3 px-5" src="images/instructions-1.png" alt=""></div></li>
+
+            <li class="my-5"> <p class="text-muted">After clicking a custom panel will appear. After reading the questionnaire carefully, click on the option below which you think is correct. Once clicked, the change is irreversible, so be careful.</p> <div class="bg-secondary d-flex w-100 mx-5 my-3"><img class="w-50 my-3 px-5" src="images/instructions-2.png" alt=""> <img class="w-50 my-3 px-5" src="images/instructions-3.png" alt=""></div> <br><p class="text-muted">If the answer clicked by you is yes then it will be shown in green color and otherwise it will be shown in red (as seen in the above image).</p></li>
+
+            <li class="my-5"><p class="text-muted">After choosing the answer <span class="bg-info text-white rounded px-3 py-2">Show Answer</span> button will be visible. It contains answer key and short explanation of answer key.</p> <div class="bg-secondary d-flex w-100 mx-5 my-3"><img class="w-50 my-3 px-5" src="images/instructions-4.png" alt=""> <img class="w-50 my-3 px-5" src="images/instructions-5.png" alt=""></div></li>
+
+            <li class="my-5"><p class="text-muted">After choosing the answer, click on the <span class="bg-secondary text-white rounded px-3 py-2">Next</span> button below to get the next question.</p> <div class="bg-secondary d-flex w-100 mx-5 my-3"><img class="w-50 my-3 px-5" src="images/instructions-6.png" alt=""></div></li>
+
+            <li class="my-5"><p class="text-muted">After completing the question, click on the <span class="bg-primary text-white rounded px-3 py-2">Finish</span> button below to see the score.</p> <div class="bg-secondary d-flex w-100 mx-5 my-3"><img class="w-50 my-3 px-5" src="images/instructions-7.png" alt=""> <img class="w-50 my-3 px-5" src="images/instructions-8.png" alt=""></div></li>
+
+            <li class="my-5"><p class="text-muted">Click the <span class="bg-danger text-white rounded px-3 py-2">Return To Home</span>game will finished.</p><p class="text-muted"> If you click on the <span class="bg-danger text-white rounded px-3 py-2">Return To Home</span> button , you can't click on the <span class="bg-success text-white rounded px-3 py-2">Start Quiz</span> button later. </p></li>
+
+          </ul>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <script src="js/quiz-game.js"></script>
+
+</body>
+</html>
